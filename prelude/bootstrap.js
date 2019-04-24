@@ -203,9 +203,7 @@ function projectToFilesystem (f) {
 
 function projectToNearby (f) {
   return require('path').join(
-    require('path').dirname(
-      EXECPATH
-    ),
+    process.cwd(),
     require('path').basename(
       f
     )
@@ -1399,19 +1397,7 @@ function payloadFileSync (pointer) {
     }
   }
 
-  childProcess.spawn = function () {
-    var args = cloneArgs(arguments);
-    setOptsEnv(args);
-    modifyShort(args);
-    return ancestor.spawn.apply(childProcess, args);
-  };
 
-  childProcess.spawnSync = function () {
-    var args = cloneArgs(arguments);
-    setOptsEnv(args);
-    modifyShort(args);
-    return ancestor.spawnSync.apply(childProcess, args);
-  };
 
   childProcess.execFile = function () {
     var args = cloneArgs(arguments);
